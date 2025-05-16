@@ -8,7 +8,7 @@ public class MenuManagerScript : MonoBehaviour
     public static MenuManagerScript instance;
     public void PlayGame()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("MainMenu");
     }
     public void ExitGame()
     {

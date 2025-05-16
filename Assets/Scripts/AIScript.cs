@@ -28,11 +28,14 @@ public class AIScript : MonoBehaviour
    
     private Vector2 velocity = Vector2.zero;
 
+ 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         startingPosition = rb.position;
+        MaxMovementSpeed = Save.instance.maxMovementSpeed;
+        Save.instance.SaveData();
 
         playerBoundary = new Boundary(PlayerBoundaryHolder.GetChild(0).position.y,
                               PlayerBoundaryHolder.GetChild(1).position.y,

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,10 +11,17 @@ public class UIManager : MonoBehaviour
     public GameObject CanvasGame;
     public GameObject CanvasRestart;
 
-    [Header ("Canvas Restart")]
-    public GameObject WinTxt;
-    public GameObject LooseTxt;
+
+    [Header("Canvas Restart")]
+    public TextMeshProUGUI endTxt;
+    public TextMeshProUGUI WinTxt;
+    public TextMeshProUGUI LoseTxt;
     public GameObject Countdown;
+    public Image background;
+    public Color winColour;
+    public Color loseColour;
+    public string[] winDisplay;
+    public string[] loseDisplay;
 
     [Header("Other")]
     public ScoreScript scoreScript;
@@ -27,18 +36,31 @@ public class UIManager : MonoBehaviour
     {
         CanvasGame.SetActive(false);
         CanvasRestart.SetActive(true);
+        Time.timeScale = 0;
 
-        if(didAIWin)
+        if (didAIWin)
         {
-            WinTxt.SetActive(false);
-            LooseTxt.SetActive(true);
+            endTxt.text = "AI WINS";
+            endTxt.enabled = true;
+            background.color = loseColour;
+            int i = Random.Range(0, loseDisplay.Length);
+            LoseTxt.text = loseDisplay[i];
+            LoseTxt.enabled = true;
+            WinTxt.enabled = false;
 
         }
         else
         {
-            WinTxt.SetActive(true);
-            LooseTxt.SetActive(false);
+            endTxt.text = "PLAYER WINS!";
+            endTxt.enabled = true;
+            background.color = winColour;
+            int i = Random.Range(0, winDisplay.Length);
+            WinTxt.text = winDisplay[i];
+            WinTxt.enabled = true;
+            LoseTxt.enabled = false;
         }
+
+        
     }
 
     public void RestartGame()

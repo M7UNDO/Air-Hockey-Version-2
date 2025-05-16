@@ -6,6 +6,7 @@ using TMPro;
 
 public class ScoreScript : MonoBehaviour
 {
+    
     public enum Score
     {
         AIScore, PlayerScore
@@ -38,6 +39,7 @@ public class ScoreScript : MonoBehaviour
             playerScore = value;
             if (value == MaxScore)
                 uiManager.ShowRestartCanvas(false);
+                
 
         }
     }
@@ -50,45 +52,6 @@ public class ScoreScript : MonoBehaviour
             AIScoreTxt.text = (++AIScore).ToString();
         else
             PlayerScoreTxt.text = (++PlayerScore).ToString();
-    }
-
-    public void Decrement(Score whichScore)
-    {
-     if (whichScore == Score.AIScore)
-     {
-      AIScoreTxt.text = (--AIScore).ToString();
-      //if(AIScore < 0);
-      //AIScore = 0; 
-     }
-     else
-      {
-     PlayerScoreTxt.text = (--PlayerScore).ToString();
-     //if (PlayerScore < 0);
-     //PlayerScore = 0;
-     }
-
-
-     }
-
-    public void minusPlayerScore()
-    {
-        if (playerScore > 0)
-        {
-            playerScore = playerScore - 1;
-            PlayerScoreTxt.text = playerScore.ToString("0");
-            return;
-
-        }
-    }
-    public void minusAIScore()
-    {
-        if (AIScore > 0)
-        {
-            AIScore = AIScore - 1;
-            AIScoreTxt.text = AIScore.ToString("0");
-            return;
-
-        }
     }
 
     public void ResetScores()

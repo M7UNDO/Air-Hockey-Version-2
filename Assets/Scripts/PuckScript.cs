@@ -23,13 +23,13 @@ public class PuckScript : MonoBehaviour
     {
         if (!WasGoal)
         {
-            if (other.tag == "AIGoal")
+            if (other.CompareTag("AIGoal"))
             {
                 ScoreScriptInstance.Increment(ScoreScript.Score.PlayerScore);
                 WasGoal = true;
                 StartCoroutine(ResetPuck(false));
             }
-            else if (other.tag == "PlayerGoal")
+            else if (other.CompareTag("PlayerGoal"))
             {
                 ScoreScriptInstance.Increment(ScoreScript.Score.AIScore);
                 WasGoal = true;
@@ -49,7 +49,7 @@ public class PuckScript : MonoBehaviour
 
     private IEnumerator ResetPuck(bool didAIScore)
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.1f);
         WasGoal = false;
         rb.velocity = rb.position = new Vector2(0, 0);
 
