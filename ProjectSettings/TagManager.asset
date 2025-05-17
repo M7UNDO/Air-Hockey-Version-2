@@ -9,6 +9,8 @@ TagManager:
   - Puck
   - Portal A
   - Portal B
+  - PlayerRed
+  - PlayerBlue
   layers:
   - Default
   - TransparentFX

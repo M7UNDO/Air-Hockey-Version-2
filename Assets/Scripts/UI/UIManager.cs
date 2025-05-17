@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     [Header("Other")]
     public ScoreScript scoreScript;
 
-    public PuckScript puckScript;
+    public PuckSpawn puckSpawn;
     public PlayerMovemnt playerMovemnt;
     public AIScript aiScript;
     public GameObject CountDown;
@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
 
         
         scoreScript.ResetScores();
-        puckScript.CenterPuck();
+        puckSpawn.SpawnPuck();
         playerMovemnt.ResetPosition();
         aiScript.ResetPosition();
 

@@ -4,49 +4,55 @@ using UnityEngine;
 
 public class PuckScript : MonoBehaviour
 {
-    public ScoreScript ScoreScriptInstance;
 
-    public AudioScript audioscript;
-    public static bool WasGoal { get; private set; }
-    private Rigidbody2D rb;
+    public ScoreScript ScoreScriptInstance;
+    public bool WasGoal;
+    public Rigidbody2D rb;
+
+    [Header("Puck Settings")]
     public float MaxSpeed;
+    public AudioSource puckHitSfx;
 
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        puckHitSfx = rb.GetComponent<AudioSource>();
         WasGoal = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    /*private void OnTriggerEnter2D(Collider2D coli)
     {
         if (!WasGoal)
         {
-            if (other.CompareTag("AIGoal"))
+            if (coli.CompareTag("AIGoal"))
             {
                 ScoreScriptInstance.Increment(ScoreScript.Score.PlayerScore);
                 WasGoal = true;
+                Destroy(gameObject);
                 StartCoroutine(ResetPuck(false));
             }
-            else if (other.CompareTag("PlayerGoal"))
+            else if (coli.CompareTag("PlayerGoal"))
             {
                 ScoreScriptInstance.Increment(ScoreScript.Score.AIScore);
                 WasGoal = true;
+                Destroy(gameObject);
                 StartCoroutine(ResetPuck(true));
             }
         }
     }
-
+    */
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "PlayerRed" || (collision.gameObject.name == "PlayerBlue"))
+        if (collision.gameObject.CompareTag("PlayerRed") || collision.gameObject.CompareTag("PlayerBlue"))
         {
-           audioscript.PlayPuckCollision();
+            puckHitSfx.Play();
         }
        
     }
 
+    /*
     private IEnumerator ResetPuck(bool didAIScore)
     {
         yield return new WaitForSecondsRealtime(0.1f);
@@ -64,12 +70,12 @@ public class PuckScript : MonoBehaviour
 
 
     }
-
+    
     public void CenterPuck()
     {
         rb.position = new Vector2(0, 0);
     }
-
+    */
     private void FixedUpdate()
     {
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, MaxSpeed);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AIScript : MonoBehaviour
 {
-
+    public GameObject puckSpawner;
     public float MaxMovementSpeed;
     private Rigidbody2D rb;
     private Vector2 startingPosition;
@@ -33,6 +33,7 @@ public class AIScript : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Puck = puckSpawner.transform.GetChild(0).GetComponent<Rigidbody2D>();
         startingPosition = rb.position;
         MaxMovementSpeed = Save.instance.maxMovementSpeed;
         Save.instance.SaveData();
@@ -50,6 +51,7 @@ public class AIScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Puck = puckSpawner.transform.GetChild(0).GetComponent<Rigidbody2D>();
         float movementSpeed;
 
         if (Puck.position.y < puckBoundary.Down)
